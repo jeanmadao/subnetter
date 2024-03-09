@@ -13,6 +13,7 @@ The following options are available
 | --subnets [NB_SUBNETS] | Minimum number of subnets required |
 | --hosts [NB_HOSTS] | Minimum number of hosts required |
 | --bits [NB_BITS] | Number of bits used for the network and subnetwork |
+| --range [NTH_SUBNET] | Display the NTH subnet host addresses range |
 
 ## Example
 ```
