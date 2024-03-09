@@ -12,15 +12,23 @@ def format_address(string):
 
 def print_help():
     print("\
-            usage: subnetter [--OPTIONS] [VALUE]\n\
-            options:\n\
-            --help\t\t\tDisplay arguments and values\n\
-            --address [ADDRESS]\tNetwork address to analyze\n\
-            --subnets [NB_SUBNETS]\tMinimum number of subnets required\n\
-            --hosts [NB_HOSTS]\tMinimum number of hosts required\n\
-            --bits [NB_BITS]\tNumber of bits used for the network and subnetwork\n\
-            --range [Nth RANGE]\t\n\
-            ")
+usage: subnetter [--OPTIONS] [VALUE]\n\
+options:\n\
+--help\t\t\tDisplay arguments and values\n\
+--address [ADDRESS]\tNetwork address to analyze\n\
+--subnets [NB_SUBNETS]\tMinimum number of subnets required\n\
+--hosts [NB_HOSTS]\tMinimum number of hosts required\n\
+--bits [NB_BITS]\tNumber of bits used for the network and subnetwork\n\
+")
+
+def print_results(address, address_class, default_mask, custom_mask, nb_subnets, nb_hosts, bits_borrowed):
+    print(f'\
+Address: {".".join(address)}\t\tAddress Class: {address_class}\n\
+Default Mask: {format_to_address(default_mask)}\tCustom Mask: {format_to_address(custom_mask)}\n\
+Total subnets: {nb_subnets}\t\tTotal usable hosts: {nb_subnets - 2}\n\
+Total hosts: {nb_hosts}\t\t\tTotal usable hosts: {nb_hosts - 2}\n\
+Bits borrowed: {bits_borrowed}\n\
+')
 
 def format_args(args):
     values = {}
@@ -113,7 +121,6 @@ def format_to_address(number):
     return f'{number // 2**24 & 2**8-1}.{number // 2**16 & 2**8-1}.{number // 2**8 & 2**8-1}.{number & 2**8-1}'
 
 
-
 def main():
     values = format_args(sys.argv)
     if values.get("address"):
@@ -135,16 +142,10 @@ def main():
             custom_mask = calculate_alternate_custom_mask(nb_hosts)
             nb_subnets = calculate_nb_subnets(default_mask, custom_mask)
             bits_borrowed = int(math.log2(nb_subnets))
-        print(
-f'Address: {".".join(values["address"])}\t\tAddress Class: {address_class}\n\
-Default Mask: {format_to_address(default_mask)}\tCustom Mask: {format_to_address(custom_mask)}\n\
-Total subnets: {nb_subnets}\t\tTotal usable hosts: {nb_subnets - 2}\n\
-Total hosts: {nb_hosts}\t\t\tTotal usable hosts: {nb_hosts - 2}\n\
-Bits borrowed: {bits_borrowed}\n')
-        if values.get("range"):
-            for i in range(int(values["range"])):
-                calculate_subnet_range(i)
-
+        else:
+            print("Error: At least\"--subnets\", or \"--bits\", or \"--hosts\" must be specified")
+            return
+        print_results(values["address"], address_class, default_mask, custom_mask, nb_subnets, nb_hosts, bits_borrowed)
     else:
         print("Error: \"--address\" must be provided")
 
