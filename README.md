@@ -19,11 +19,11 @@ The following options are available
 python subnetter.py --address 165.100.0.0 --subnets 1000
 ```
 
-output:
+Output:
 ```
 Address: 165.100.0.0		Address Class: B
 Default Mask: 255.255.0.0	Custom Mask: 255.255.255.192
-Total subnets: 1024		    Total usable hosts: 1022
-Total hosts: 64			    Total usable hosts: 62
+Total subnets: 1024		Total usable hosts: 1022
+Total hosts: 64			Total usable hosts: 62
 Bits borrowed: 10
 ```
