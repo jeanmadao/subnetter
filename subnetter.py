@@ -20,8 +20,8 @@ options:\n\
 --help\t\t\tList available arguments\n\
 --address [ADDRESS]\tNetwork address to analyze\n\
 --subnets [NB_SUBNETS]\tMinimum number of subnets required\n\
---hosts [NB_HOSTS]\tMinimum number of hosts required\n\
---bits [NB_BITS]\tNumber of bits used for the network and subnetwork\n\
+--hosts [NB_HOSTS]\tMinimum number of usable hosts required\n\
+--cidr [NB_BITS]\tCIDR Notation to represent the network portion\n\
 --range [NTH_SUBNET]\tDisplay the NTH subnet host addresses range\n\
 ")
 
@@ -63,12 +63,12 @@ def format_args(args):
                 except:
                     print("Error: \"--hosts\" value must be an integer")
 
-            case "--bits":
+            case "--cidr":
                 try:
                     i += 1
-                    values["bits"] = int(args[i])
+                    values["cidr"] = int(args[i])
                 except:
-                    print("Error: \"--bits\" value must be an integer")
+                    print("Error: \"--cidr\" value must be an integer")
 
             case "--range":
                 try:
@@ -155,13 +155,13 @@ def main():
             custom_mask = calculate_alternate_custom_mask(nb_hosts)
             nb_subnets = calculate_nb_subnets(default_mask, custom_mask)
             bits_borrowed = int(math.log2(nb_subnets))
-        elif values.get("bits"):
-            nb_hosts = 2**(32 - values["bits"])
+        elif values.get("cidr"):
+            nb_hosts = 2**(32 - values["cidr"])
             custom_mask = calculate_alternate_custom_mask(nb_hosts)
             nb_subnets = calculate_nb_subnets(default_mask, custom_mask)
             bits_borrowed = int(math.log2(nb_subnets))
         else:
-            print("Error: At least\"--subnets\", or \"--bits\", or \"--hosts\" must be specified")
+            print("Error: At least\"--subnets\", or \"--cidr\", or \"--hosts\" must be specified")
             return
         print_results(values["address"], address_class, default_mask, custom_mask, nb_subnets, nb_hosts, bits_borrowed)
         if 0 < values.get("range") <= nb_subnets :
