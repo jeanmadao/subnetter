@@ -11,8 +11,8 @@ The following options are available
 | --help | List available arguments |
 | --address [ADDRESS] | Network address to analyze |
 | --subnets [NB_SUBNETS] | Minimum number of subnets required |
-| --hosts [NB_HOSTS] | Minimum number of hosts required |
-| --bits [NB_BITS] | Number of bits used for the network and subnetwork |
+| --hosts [NB_HOSTS] | Minimum number of usable hosts required |
+| --cidr [NB_BITS] | CIDR Notation to represent the network portion |
 | --range [NTH_SUBNET] | Display the NTH subnet host addresses range |
 
 ## Example
