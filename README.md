@@ -17,14 +17,17 @@ The following options are available
 
 ## Example
 ```
-python subnetter.py --address 165.100.0.0 --subnets 1000
+python subnetter.py --address 192.10.10.0 --subnets 14 --range 4 
 ```
 
 Output:
 ```
-Address: 165.100.0.0		Address Class: B
-Default Mask: 255.255.0.0	Custom Mask: 255.255.255.192
-Total subnets: 1024		Total usable hosts: 1022
-Total hosts: 64			Total usable hosts: 62
-Bits borrowed: 10
+Address: 192.10.10.0		Address Class: C
+Default Mask: 255.255.255.0	Custom Mask: 255.255.255.240
+Total subnets: 16		Total usable hosts: 14
+Total hosts: 16			Total usable hosts: 14
+Bits borrowed: 4
+
+Range:
+4) 192.10.10.48 to 192.10.10.63
 ```

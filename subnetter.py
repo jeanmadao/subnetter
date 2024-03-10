@@ -147,7 +147,6 @@ def main():
         default_mask = get_default_mask(address_class)
         if values.get("subnets"):
             nb_subnets = calculate_min_square(values["subnets"] + 2)
-            print(nb_subnets)
             bits_borrowed = int(math.log2(nb_subnets))
             custom_mask = calculate_custom_mask(default_mask, bits_borrowed)
             nb_hosts = calculate_host_addresses(custom_mask)
