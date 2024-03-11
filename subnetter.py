@@ -164,7 +164,7 @@ def main():
             print("Error: At least\"--subnets\", or \"--cidr\", or \"--hosts\" must be specified")
             return
         print_results(values["address"], address_class, default_mask, custom_mask, nb_subnets, nb_hosts, bits_borrowed)
-        if 0 < values.get("range") <= nb_subnets :
+        if values.get("range")  and 0 < values.get("range") <= nb_subnets :
              print_subnet_range(values.get("range"), calculate_subnet_range(values["address"], custom_mask, values['range']))
     else:
         print("Error: \"--address\" must be provided")
