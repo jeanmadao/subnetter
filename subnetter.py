@@ -29,7 +29,7 @@ def print_results(address, address_class, default_mask, custom_mask, nb_subnets,
     print(f'\
 Address: {format_to_address(address).ljust(20)} Address Class: {address_class}\n\
 Default Mask: {format_to_address(default_mask).ljust(15)} Custom Mask: {format_to_address(custom_mask)}\n\
-Total subnets: {str(nb_subnets).ljust(14)} Total usable hosts: {nb_subnets - 2}\n\
+Total subnets: {str(nb_subnets).ljust(14)} Total usable subnets: {nb_subnets - 2}\n\
 Total hosts: {str(nb_hosts).ljust(16)} Total usable hosts: {nb_hosts - 2}\n\
 Bits borrowed: {bits_borrowed}\n\
 ')
