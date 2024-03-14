@@ -38,39 +38,38 @@ def format_args(args):
     values = {}
     i = 0
     while i < len(args):
-        match args[i]:
-            case "--help":
+        if args[i] == "--help":
                 print_help()
 
-            case "--address":
+        if args[i] == "--address":
                 try:
                     i += 1
                     values["address"] = format_address(args[i])
                 except:
                     print("Error: \"--address\" value must be in this format: \"[0-255].[0-255].[0-255].[0-255]\"")
 
-            case "--subnets":
+        if args[i] == "--subnets":
                 try:
                     i += 1
                     values["subnets"] = int(args[i])
                 except:
                     print("Error: \"--subnets\" value must be an integer")
 
-            case "--hosts":
+        if args[i] == "--hosts":
                 try:
                     i += 1
                     values["hosts"] = int(args[i])
                 except:
                     print("Error: \"--hosts\" value must be an integer")
 
-            case "--cidr":
+        if args[i] == "--cidr":
                 try:
                     i += 1
                     values["cidr"] = int(args[i])
                 except:
                     print("Error: \"--cidr\" value must be an integer")
 
-            case "--range":
+        if args[i] == "--range":
                 try:
                     i += 1
                     values["range"] = int(args[i])
@@ -91,12 +90,11 @@ def get_address_class(address):
         return 'D'
 
 def get_default_mask(address_class):
-    match address_class:
-        case 'A':
+    if address_class == 'A':
             return (2**32 - 1) ^ (2**24 - 1)
-        case 'B':
+    elif address_class == 'B':
             return (2**32 - 1) ^ (2**16 - 1)
-        case _: #C
+    else: #C
             return (2**32 - 1) ^ (2**8 - 1)
 
 def calculate_min_square(nb):
